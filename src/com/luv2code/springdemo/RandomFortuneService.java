@@ -11,7 +11,8 @@ public class RandomFortuneService implements FortuneService {
     private String[] data = {
       "Beware of the wolf in sheep's clothing",
       "Diligence is the mother of good ends",
-      "The journey is the reward"
+      "The journey is the reward",
+            "Quran is the way forward"
     };
 
     // create a random number generator
