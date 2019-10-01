@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class TennisCoach implements Coach {
     @Autowired
-    @Qualifier("happyFortuneService")
+    @Qualifier("randomFortuneService")
     private FortuneService fortuneService;
 
     // define a default constructor
@@ -34,6 +34,6 @@ public class TennisCoach implements Coach {
 
     @Override
     public String getDailyFortune() {
-        return "Today is a great day";
+        return fortuneService.getFortune();
     }
 }
