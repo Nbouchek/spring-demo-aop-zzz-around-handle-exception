@@ -14,6 +14,9 @@ public class MainDemoApp {
         // call the business method
         theAccountDAO.addAccount();
 
+        // do it again!
+        theAccountDAO.addAccount();
+
         // close the context
         context.close();
     }
