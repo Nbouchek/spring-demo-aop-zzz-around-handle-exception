@@ -10,6 +10,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicReference;
 
 @Aspect
 @Component
@@ -21,7 +22,7 @@ public class MyDemoLoggingAspect {
             pointcut = "execution(* com.luv2code.aopdemo.dao.AccountDAO.findAccounts(..))",
             returning = "result"
     )
-    public void afterReturningFindAccountsAdvice (JoinPoint theJoinPoint, List<Account> result) {
+    public void afterReturningFindAccountsAdvice(JoinPoint theJoinPoint, List<Account> result) {
         // print out which method we are advising on
         String method = theJoinPoint.getSignature().toString();
         System.out.println("\n=====> Executing @AfterReturning on method: " + method);
@@ -29,6 +30,22 @@ public class MyDemoLoggingAspect {
         // print ou the results of the method call
         System.out.println("\n=====> result is: " + result);
 
+        // let's post-process the results ... let's modify it
+
+        // convert the account names to uppercase
+        convertAccountNamesToUpperCase(result);
+        System.out.println("\n=====> result is: " + result);
+    }
+
+    private void convertAccountNamesToUpperCase(List<Account> result) {
+        // loop through accounts
+        for (Account tempAccount : result) {
+            // get uppercase version of name
+            String theUpperName = tempAccount.getName().toUpperCase();
+
+            // update the name on the account
+            tempAccount.setName(theUpperName);
+        }
     }
 
     @Before("com.luv2code.aopdemo.aspect.LuvAopExpressions.forDaoPackageNoGetterSetter()")
