@@ -17,4 +17,11 @@ public class TrafficFortuneService {
         // return a fortune
         return "Expect heavy traffic this morning";
     }
+
+    public String getFortune(boolean b) {
+        if (b) {
+            throw new RuntimeException("Major event! Highway is closed!");
+        }
+        return getFortune();
+    }
 }
