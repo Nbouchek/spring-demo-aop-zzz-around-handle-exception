@@ -3,7 +3,11 @@ package com.luv2code.aopdemo;
 import com.luv2code.aopdemo.service.TrafficFortuneService;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import java.util.logging.Logger;
+
 public class AroundWithLoggerDemoApp {
+    private static Logger myLogger = Logger.getLogger(AroundWithLoggerDemoApp.class.getName());
+
     public static void main(String[] args) {
         // read spring config java class
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(DemoConfig.class);
@@ -11,11 +15,11 @@ public class AroundWithLoggerDemoApp {
         // get the bean from spring container
         TrafficFortuneService theTrafficFortuneService = context.getBean("trafficFortuneService", TrafficFortuneService.class);
 
-        System.out.println("\nMain Program: AroundDemoApp");
-        System.out.println("\nCalling getFortune");
+        myLogger.info("\nMain Program: AroundDemoApp");
+        myLogger.info("\nCalling getFortune");
         String data = theTrafficFortuneService.getFortune();
-        System.out.println("\nMy fortune is: " + data);
-        System.out.println("\nFinished");
+        myLogger.info("\nMy fortune is: " + data);
+        myLogger.info("\nFinished");
         // close the context
         context.close();
     }
